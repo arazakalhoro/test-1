@@ -15,16 +15,17 @@ return new class extends Migration
             $table->id();
             $table->string('reference')->unique();
             $table->unsignedBigInteger('customer_id');
-            $table->unsignedBigInteger('address_id');
+            $table->unsignedBigInteger('shipping_address_id');
+            $table->unsignedBigInteger('billing_address_id');
             $table->unsignedBigInteger('order_status_id');
-            $table->decimal('discounts')->default(0.00);
-            $table->decimal('total_products');
             $table->decimal('tax')->default(0.00);
-            $table->decimal('total');
             $table->foreign('customer_id')
                 ->references('id')
                 ->on('customers');
-            $table->foreign('address_id')
+            $table->foreign('shipping_address_id')
+                ->references('id')
+                ->on('customer_addresses');
+            $table->foreign('billing_address_id')
                 ->references('id')
                 ->on('customer_addresses');
             $table->foreign('order_status_id')

@@ -27,7 +27,7 @@ class Order extends Model
 
     public function getTotalPriceAttribute(): float
     {
-        return $this->orderItem->sum(fn ($item) => $item->product->price * $item->quantity);
+        return $this->orderItems->sum(fn ($item) => $item->product->price * $item->quantity);
     }
 
     public function orderStatus(): BelongsTo

@@ -7,6 +7,8 @@ use App\Models\OrderStatus;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Number;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Yajra\DataTables\DataTables;
 
@@ -47,6 +49,9 @@ class OrdersController extends Controller
             })
             ->addColumn('customer', function ($order) {
                 return $order->customer->first_name . ' ' . $order->customer->last_name;
+            })
+            ->addColumn('total', function ($order) {
+                return Number::format($order->total_price, 2);
             })
             ->addColumn('status', function ($order) {
                 return $order->orderStatus->name;
